@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>live tv</title>
+    <!-- Gunakan stylesheet dari Plyr -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css">
+    <!-- Kode CSS untuk tombol "Halaman Lain" -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ff0000; /* Background warna merah */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0 0 20px;
+        }
+        .channel-selector {
+            margin-bottom: 20px;
+        }
+        .custom-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .plyr__video-embed {
+            max-width: 100%;
+        }
+
+        /* Kode CSS untuk tombol "Halaman Lain" */
+        .button-container {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff; /* Warna latar belakang tombol biru */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s; /* Transisi perubahan warna latar belakang */
+        }
+        .btn:hover {
+            background-color: #0056b3; /* Warna latar belakang tombol biru saat dihover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nonton Tv Gratis</h1>
+        
+        <!-- Dropdown dengan daftar saluran -->
+        <div class="channel-selector">
+            <label for="channel">Pilih Saluran:</label>
+            <select id="channel" class="custom-select">
+                <option value="http://210.210.155.37/qwr9ew/s/s03/index.m3u8">Sctv</option>
+                <option value="http://210.210.155.37/qwr9ew/s/s04/index.m3u8">Indosiar</option>
+                <option value="http://210.210.155.37/qwr9ew/s/s07/index1.m3u8">Antv</option>
+                
+                <!-- Tambahkan pilihan saluran lain di sini -->
+            </select>
+        </div>
+        
+        <!-- Pemutar video menggunakan Plyr -->
+        <div class="plyr__video-embed">
+            <video id="my-video" class="plyr__video-player" controls>
+                <source src="" type="application/x-mpegURL">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <!-- Tombol menuju halaman lain -->
+        <div class="button-container">
+            <a href="iframe.html" class="btn btn-primary">Nonton Rcti dll di sini..!</a>
+        </div>
+    </div>
+
+    <!-- Gunakan JavaScript dari Plyr -->
+    <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Inisialisasi pemutar video dengan Plyr
+            const videoPlayer = new Plyr("#my-video");
+
+            // Mengatur URL default sebagai channel pertama
+            const defaultChannelUrl = "http://210.210.155.37/qwr9ew/s/s03/index.m3u8";
+            videoPlayer.source = {
+                type: "video",
+                sources: [
+                    {
+                        src: defaultChannelUrl,
+                        type: "application/x-mpegURL",
+                    },
+                ],
+            };
+
+            // Fungsi untuk mengganti saluran video ketika pilihan diubah
+            const channelSelector = document.getElementById("channel");
+            channelSelector.addEventListener("change", function() {
+                const selectedChannel = channelSelector.value;
+                videoPlayer.source = {
+                    type: "video",
+                    sources: [
+                        {
+                            src: selectedChannel,
+                            type: "application/x-mpegURL",
+                        },
+                    ],
+                };
+                videoPlayer.play();
+            });
+        });
+    </script>
+</body>
+</html>
