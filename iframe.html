@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pemutar Video di Halaman Lain</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ff0000; /* Background warna abu-abu */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #ff0000;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0 0 20px;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Perbandingan aspek video 16:9 */
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .custom-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>live lain nya</h1>
+        
+        <!-- Dropdown dengan daftar sumber video -->
+        <div class="channel-selector">
+            <label for="video-source">Pilih Sumber Video:</label>
+            <select id="video-source" class="custom-select">
+                <option value="https://embed.rctiplus.com/live/rcti/okezone">RCTI</option>
+                <option value="https://embed.rctiplus.com/live/mnctv/okezone">MNCTV</option>
+                <option value="https://embed.rctiplus.com/live/gtv/okezone">GTV</option>
+                
+                
+                <!-- Tambahkan pilihan video lain di sini -->
+            </select>
+        </div>
+        
+        <!-- Kontainer untuk iframe -->
+        <div class="iframe-container">
+            <iframe id="video-iframe" src="https://embed.rctiplus.com/live/rcti/okezone" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk mengubah sumber video iframe
+        function changeVideoSource() {
+            const videoSource = document.getElementById("video-source").value;
+            const videoIframe = document.getElementById("video-iframe");
+            videoIframe.src = videoSource;
+        }
+
+        // Tambahkan event listener untuk perubahan pilihan video
+        document.getElementById("video-source").addEventListener("change", changeVideoSource);
+    </script>
+</body>
+</html>
